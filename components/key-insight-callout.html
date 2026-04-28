@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--
+  PETAL Insights — Key Insight Callout Component
+
+  The signature callout card used to land conceptual punch lines.
+  Used in the WeChat explainer graphics and at moments in interactives
+  where a single insight needs disproportionate emphasis.
+
+  Anatomy:
+    - Subtle gold-tinted background fill (--callout-bg)
+    - Thin gold left border, thicker top-left corner accent
+    - Small DM Mono header tag at top ("THE KEY INSIGHT" or similar)
+    - Two-line Cormorant statement:
+        Line 1 (regular): the setup
+        Line 2 (italic gold): the conceptual reframe — the punch line
+    - Single Outfit detail line below: the practical consequence
+
+  The visual signature is the asymmetric gold accent on the left edge,
+  which creates a sense of authority without resorting to heavy borders.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PETAL Key Insight Callout Component</title>
+<link rel="stylesheet" href="../tokens/colors.css">
+<link rel="stylesheet" href="../tokens/typography.css">
+<style>
+  body {
+    margin: 0;
+    padding: 80px 60px;
+    background:
+      radial-gradient(ellipse at 20% 15%, var(--glow-accent) 0%, transparent 60%),
+      linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
+    color: var(--text);
+    font-family: var(--font-body);
+  }
+
+  .demo-stack {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  /* ── Key insight callout ──────────────────────────────── */
+
+  .insight-callout {
+    position: relative;
+    background: var(--callout-bg);
+    border: 1px solid rgba(200, 169, 110, 0.3);
+    border-radius: 3px;
+    padding: 36px 40px;
+  }
+
+  /* Asymmetric gold accent: thicker on top-left corner */
+  .insight-callout::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+  }
+
+  .insight-callout::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 8px;
+    background: var(--accent);
+  }
+
+  .insight-callout .header-tag {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: var(--tracking-wide);
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .insight-callout .statement-setup {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .insight-callout .statement-punch {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--accent);
+    line-height: 1.3;
+    margin-bottom: 24px;
+  }
+
+  .insight-callout .practical-line {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* ── Variation: alert insight (used for diagnostic moments) ── */
+
+  .insight-callout.is-alert {
+    background: var(--callout-alert-bg);
+    border-color: var(--border-alert);
+  }
+
+  .insight-callout.is-alert::before,
+  .insight-callout.is-alert::after {
+    background: var(--alert);
+  }
+
+  .insight-callout.is-alert .header-tag,
+  .insight-callout.is-alert .statement-punch {
+    color: var(--alert);
+  }
+</style>
+</head>
+<body>
+<div class="demo-stack">
+
+  <!-- Default insight callout (gold) -->
+  <div class="insight-callout">
+    <div class="header-tag">The Key Insight</div>
+    <div class="statement-setup">[The setup line states the surface fact.]</div>
+    <div class="statement-punch">[The italic line reframes it conceptually.]</div>
+    <div class="practical-line">[The practical consequence: what this means for the reader, in plain language, two sentences maximum.]</div>
+  </div>
+
+  <!-- Alert insight callout (red) -->
+  <div class="insight-callout is-alert">
+    <div class="header-tag">The Diagnostic Moment</div>
+    <div class="statement-setup">[Setup line for the alert version.]</div>
+    <div class="statement-punch">[Italic punch line, in muted red.]</div>
+    <div class="practical-line">[Practical consequence framed as the diagnostic or treatment implication.]</div>
+  </div>
+
+</div>
+</body>
+</html>

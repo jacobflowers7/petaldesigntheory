@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<!--
+  PETAL Insights — Stage Card Component
+
+  Numbered stage card pattern used in:
+    - Diagnostic funnels and treatment pathways
+    - Multi-step explainers
+    - Sequence compositions
+    - Anywhere a discrete stage in a process needs visual weight
+
+  Two variants:
+    1. Default (gold accent) — for normal stages in a sequence
+    2. Alert (red accent) — for the diagnostic moment, the
+       critical stage, or the article's specific focus stage in a
+       broader pathway
+
+  Card anatomy:
+    - Numbered circle (left) with italic Cormorant numeral
+    - Category tag (DM Mono, gold, top of right column)
+    - Stage title (Cormorant 600, large)
+    - Detail line (Outfit 300, dim)
+
+  Cards stack vertically with dashed connector lines between them
+  (see connector pattern at bottom of file).
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PETAL Stage Card Component</title>
+<link rel="stylesheet" href="../tokens/colors.css">
+<link rel="stylesheet" href="../tokens/typography.css">
+<style>
+  body {
+    margin: 0;
+    padding: 60px;
+    background:
+      radial-gradient(ellipse at 50% 100%, var(--glow-accent) 0%, transparent 60%),
+      linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
+    color: var(--text);
+    font-family: var(--font-body);
+  }
+
+  .demo-stack {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* ── Stage card (default / gold) ──────────────────────── */
+
+  .stage-card {
+    position: relative;
+    background: rgba(13, 20, 25, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 24px 32px 24px 130px;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .stage-card .number-circle {
+    position: absolute;
+    left: 38px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 1px solid rgba(200, 169, 110, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stage-card .number {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .stage-card .category-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: var(--tracking-wide);
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .stage-card .stage-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .stage-card .detail-line {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  /* ── Stage card (alert variant) ───────────────────────── */
+
+  .stage-card.is-alert {
+    background: var(--callout-alert-bg);
+    border-color: var(--border-alert);
+  }
+
+  .stage-card.is-alert .number-circle {
+    background: rgba(224, 92, 92, 0.1);
+    border-color: var(--alert);
+  }
+
+  .stage-card.is-alert .number,
+  .stage-card.is-alert .category-tag {
+    color: var(--alert);
+  }
+
+  /* ── Connector between cards ──────────────────────────── */
+
+  .connector {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .connector svg {
+    height: 100%;
+  }
+
+  .connector-line {
+    stroke: rgba(200, 169, 110, 0.3);
+    stroke-width: 1;
+    stroke-dasharray: 3, 4;
+    fill: none;
+  }
+
+  .connector-arrow {
+    stroke: rgba(200, 169, 110, 0.5);
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  /* Connector leading to alert card */
+  .connector.to-alert .connector-line {
+    stroke: rgba(224, 92, 92, 0.3);
+  }
+
+  .connector.to-alert .connector-arrow {
+    stroke: rgba(224, 92, 92, 0.5);
+  }
+</style>
+</head>
+<body>
+<div class="demo-stack">
+
+  <!-- Stage 01 (default) -->
+  <div class="stage-card">
+    <div class="number-circle">
+      <div class="number">01</div>
+    </div>
+    <div class="category-tag">[Category Tag]</div>
+    <div class="stage-title">[Stage title goes here.]</div>
+    <div class="detail-line">[One-line detail describing what happens at this stage.]</div>
+  </div>
+
+  <!-- Connector -->
+  <div class="connector">
+    <svg viewBox="0 0 20 60" width="20" height="60" preserveAspectRatio="xMidYMid meet">
+      <line class="connector-line" x1="10" y1="0" x2="10" y2="48"/>
+      <path class="connector-arrow" d="M 6 44 L 10 52 L 14 44"/>
+    </svg>
+  </div>
+
+  <!-- Stage 02 (default) -->
+  <div class="stage-card">
+    <div class="number-circle">
+      <div class="number">02</div>
+    </div>
+    <div class="category-tag">[Category Tag]</div>
+    <div class="stage-title">[Second stage title.]</div>
+    <div class="detail-line">[One-line detail for this stage.]</div>
+  </div>
+
+  <!-- Connector to alert card (uses red dashed line) -->
+  <div class="connector to-alert">
+    <svg viewBox="0 0 20 60" width="20" height="60" preserveAspectRatio="xMidYMid meet">
+      <line class="connector-line" x1="10" y1="0" x2="10" y2="48"/>
+      <path class="connector-arrow" d="M 6 44 L 10 52 L 14 44"/>
+    </svg>
+  </div>
+
+  <!-- Stage 03 (alert variant) -->
+  <div class="stage-card is-alert">
+    <div class="number-circle">
+      <div class="number">03</div>
+    </div>
+    <div class="category-tag">[Critical Stage Tag]</div>
+    <div class="stage-title">[The diagnostic / critical moment.]</div>
+    <div class="detail-line">[Why this stage carries the weight in the sequence.]</div>
+  </div>
+
+</div>
+</body>
+</html>

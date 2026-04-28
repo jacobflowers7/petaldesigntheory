@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--
+  PETAL Insights — Frame Template
+
+  The standard chrome that wraps every PETAL composition (interactive
+  or static). Includes:
+
+    - Top frame: PETAL · INSIGHTS series tag (left, gold mono)
+                 + section context (right, dim mono)
+                 + hairline divider
+
+    - Body slot: where the actual editorial content goes
+
+    - Bottom frame: 1-2 summary lines (dim white)
+                    + CITYNEWSSERVICE.CN · SHANGHAI CHEST HOSPITAL
+                      (gold mono branding)
+                    + hairline divider above
+
+  This frame is the system signature. Every public-facing PETAL asset
+  uses it. Replace the [BRACKETED] placeholders with content-specific
+  text.
+
+  Dimensions: this template is sized for an 800×600 interactive
+  embed. For static 1080×1440 graphics, scale the type values per
+  tokens/typography.css and adjust positions proportionally.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PETAL Frame Template</title>
+<link rel="stylesheet" href="../tokens/colors.css">
+<link rel="stylesheet" href="../tokens/typography.css">
+<style>
+  body {
+    margin: 0;
+    background:
+      radial-gradient(ellipse at 20% 15%, var(--glow-accent) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 85%, var(--glow-alert) 0%, transparent 60%),
+      linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
+    color: var(--text);
+    font-family: var(--font-body);
+    min-height: 100vh;
+  }
+
+  .canvas {
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* ── Top frame ─────────────────────────────────────────── */
+
+  .top-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--border);
+    z-index: 10;
+  }
+
+  .series-tag {
+    font-family: var(--font-mono);
+    font-size: var(--type-int-series-tag);
+    font-weight: 400;
+    letter-spacing: var(--tracking-wide);
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .center-context {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text-dim);
+  }
+
+  .right-context {
+    font-family: var(--font-mono);
+    font-size: var(--type-int-stage-label);
+    letter-spacing: var(--tracking-normal);
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  /* ── Body slot ─────────────────────────────────────────── */
+
+  .body-slot {
+    position: absolute;
+    top: 44px;
+    left: 0;
+    right: 0;
+    bottom: 36px;
+    /*
+      Editorial content goes here. Use generous padding (24-28px)
+      around any content; the frame already establishes the outer
+      boundary.
+    */
+  }
+
+  /* ── Bottom frame ──────────────────────────────────────── */
+
+  .bottom-frame {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .summary-line {
+    font-size: 9px;
+    color: var(--text-muted);
+    font-style: italic;
+    font-family: var(--font-body);
+    font-weight: 300;
+  }
+
+  .branding {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--accent);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <!-- Top frame -->
+  <div class="top-frame">
+    <div class="series-tag">PETAL · Insights · [SESSION NAME]</div>
+    <div class="center-context">[Optional centered editorial label]</div>
+    <div class="right-context">[Right context tag]</div>
+  </div>
+
+  <!-- Body slot — replace this with editorial content -->
+  <div class="body-slot">
+    <!--
+      Insert composition content here. For interactives, this is
+      typically a left-right layout (visual + info panel). For
+      explainer compositions, it's a vertical stacked layout. For
+      grid compositions, it's a 2×2 arrangement.
+
+      Always keep some breathing room from the frame edges.
+    -->
+  </div>
+
+  <!-- Bottom frame -->
+  <div class="bottom-frame">
+    <div class="summary-line">[One-line editorial disclaimer or contextual note.]</div>
+    <div class="branding">PETAL · Shanghai Chest Hospital</div>
+  </div>
+
+</div>
+</body>
+</html>

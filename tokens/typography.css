@@ -1,0 +1,132 @@
+/**
+ * PETAL Insights — Typography Tokens
+ *
+ * Font stack imports and type scale for the PETAL visual identity.
+ * Three families, each with a specific role:
+ *
+ *   Cormorant Garamond — display headlines, editorial emphasis
+ *   Outfit             — body copy and UI text
+ *   DM Mono            — small caps tags, technical labels
+ *
+ * All three are Google Fonts, loaded via the import below.
+ *
+ * Typographic principles:
+ *   - Cormorant does the editorial heavy lifting (mix regular + italic
+ *     in single headlines for editorial rhythm)
+ *   - Outfit handles everything else, default weight 300 (light)
+ *   - DM Mono is always uppercase, always letter-spaced
+ *   - No bold italic. No underlines. No all-caps Cormorant.
+ */
+
+/* ────────────────────────────────────────────────────────────────
+   Font imports
+   ──────────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Outfit:wght@200;300;400;500&display=swap');
+
+:root {
+  /* ──────────────────────────────────────────────────────────────
+     Font family stacks
+     ────────────────────────────────────────────────────────────── */
+
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'DM Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ──────────────────────────────────────────────────────────────
+     Type scale — interactive (800×600 canvas)
+     ────────────────────────────────────────────────────────────── */
+
+  --type-int-series-tag: 9px;     /* DM Mono */
+  --type-int-stage-label: 9px;    /* DM Mono */
+  --type-int-panel-header: 9px;   /* DM Mono */
+  --type-int-stage-title: 24px;   /* Cormorant 600 */
+  --type-int-description: 12px;   /* Outfit 300 */
+  --type-int-key-fact: 11px;      /* Outfit 400 */
+  --type-int-button: 9px;         /* DM Mono */
+
+  /* ──────────────────────────────────────────────────────────────
+     Type scale — static (1080×1440 canvas)
+     ────────────────────────────────────────────────────────────── */
+
+  --type-stat-series-tag: 16px;       /* DM Mono, 0.25em letter-spacing */
+  --type-stat-section-label: 13px;    /* DM Mono, 0.2em letter-spacing */
+  --type-stat-display: 68px;          /* Cormorant 600 */
+  --type-stat-display-large: 78px;    /* Cormorant 600 */
+  --type-stat-subhead: 22px;          /* Outfit 300 */
+  --type-stat-stage-title: 28px;      /* Cormorant 600 */
+  --type-stat-body: 15px;             /* Outfit 300 */
+  --type-stat-italic-caption: 22px;   /* Cormorant italic */
+  --type-stat-footer: 11px;           /* DM Mono, 0.25em letter-spacing */
+
+  /* ──────────────────────────────────────────────────────────────
+     Letter spacing
+     ──────────────────────────────────────────────────────────────
+     DM Mono is always letter-spaced. Tighter for inline tags,
+     wider for section breaks and footers.
+  */
+
+  --tracking-tight: 0.1em;     /* small inline mono */
+  --tracking-normal: 0.15em;   /* most mono labels */
+  --tracking-wide: 0.2em;      /* section tags, prominent labels */
+  --tracking-extra: 0.25em;    /* series tag, footers */
+
+  /* ──────────────────────────────────────────────────────────────
+     Font weights (semantic aliases)
+     ────────────────────────────────────────────────────────────── */
+
+  --weight-display-light: 300;
+  --weight-display-regular: 400;
+  --weight-display-bold: 600;
+
+  --weight-body-light: 300;
+  --weight-body-regular: 400;
+  --weight-body-medium: 500;
+
+  --weight-mono-regular: 400;
+}
+
+/**
+ * Editorial typography pattern
+ *
+ * The signature PETAL move: a multi-line headline mixing Cormorant
+ * regular and italic, with the italic line in gold. This creates
+ * editorial rhythm and signals that the content is editorial, not
+ * interface.
+ *
+ *   <h1 class="petal-headline">
+ *     <span class="line-regular">Catching a</span>
+ *     <span class="line-italic">pulmonary embolism</span>
+ *     <span class="line-regular">in four stages.</span>
+ *   </h1>
+ *
+ *   .petal-headline {
+ *     font-family: var(--font-display);
+ *     font-weight: var(--weight-display-bold);
+ *     font-size: var(--type-stat-display);
+ *     color: var(--text);
+ *   }
+ *   .petal-headline .line-italic {
+ *     font-style: italic;
+ *     color: var(--accent);
+ *   }
+ */
+
+/**
+ * Mono tag pattern
+ *
+ * The other signature move: small uppercase mono tags marking
+ * sections, stages, or contextual labels. Always uppercase, always
+ * letter-spaced, always either gold (active/primary) or muted
+ * (contextual/secondary).
+ *
+ *   <span class="petal-tag">Early Screening</span>
+ *
+ *   .petal-tag {
+ *     font-family: var(--font-mono);
+ *     font-size: var(--type-stat-section-label);
+ *     letter-spacing: var(--tracking-wide);
+ *     text-transform: uppercase;
+ *     color: var(--accent);
+ *   }
+ */

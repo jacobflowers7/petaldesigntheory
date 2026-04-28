@@ -1,0 +1,114 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "PETAL Insights design tokens. Format follows the W3C Design Tokens Community Group draft specification.",
+
+  "color": {
+    "background": {
+      "primary": {
+        "$value": "#070c11",
+        "$type": "color",
+        "$description": "Primary background. Near-black with faint blue-black undertone."
+      },
+      "surface": {
+        "$value": "#0d1419",
+        "$type": "color",
+        "$description": "Card surfaces, panels, secondary containers."
+      },
+      "border": {
+        "$value": "rgba(255, 255, 255, 0.08)",
+        "$type": "color",
+        "$description": "All dividers, panel borders, hairlines."
+      }
+    },
+
+    "accent": {
+      "primary": {
+        "$value": "#c8a96e",
+        "$type": "color",
+        "$description": "Primary warm gold. Section labels, mono tags, vessel mid-state, accent borders."
+      },
+      "contrast": {
+        "$value": "#f4e8c8",
+        "$type": "color",
+        "$description": "Cream-gold for peak emphasis states. Use sparingly at one or two points per composition."
+      },
+      "vessel": {
+        "$value": "rgba(242, 244, 247, 0.18)",
+        "$type": "color",
+        "$description": "Muted grey for ghost/baseline elements."
+      },
+      "alert": {
+        "$value": "#e05c5c",
+        "$type": "color",
+        "$description": "Muted clinical red. Used ONLY for alert states. One per composition."
+      }
+    },
+
+    "text": {
+      "primary": {
+        "$value": "#f2f4f7",
+        "$type": "color",
+        "$description": "Primary text. Off-white, never pure white."
+      },
+      "dim": {
+        "$value": "rgba(242, 244, 247, 0.72)",
+        "$type": "color",
+        "$description": "Body copy, descriptions, secondary text."
+      },
+      "muted": {
+        "$value": "rgba(242, 244, 247, 0.42)",
+        "$type": "color",
+        "$description": "Tertiary text, timestamps, minor labels."
+      }
+    },
+
+    "atmosphere": {
+      "glow-accent": {
+        "$value": "rgba(200, 169, 110, 0.08)",
+        "$type": "color",
+        "$description": "Gold corner glow for background atmosphere. Apply via radial gradient."
+      },
+      "glow-alert": {
+        "$value": "rgba(224, 92, 92, 0.06)",
+        "$type": "color",
+        "$description": "Red corner glow for alert-context backgrounds. Use 0.04 opacity for non-alert compositions."
+      }
+    },
+
+    "component": {
+      "callout-bg": {
+        "$value": "rgba(200, 169, 110, 0.06)",
+        "$type": "color",
+        "$description": "Background fill for key insight callout cards."
+      },
+      "callout-alert-bg": {
+        "$value": "rgba(224, 92, 92, 0.04)",
+        "$type": "color",
+        "$description": "Background fill for alert callout cards (diagnostic moments, final stages)."
+      },
+      "border-alert": {
+        "$value": "rgba(224, 92, 92, 0.4)",
+        "$type": "color",
+        "$description": "Border color for alert-state containers."
+      }
+    }
+  },
+
+  "rules": {
+    "one-red-per-composition": {
+      "$description": "The clinical red is reserved for the single critical alert moment per composition. Multiple red elements dilute the signal."
+    },
+    "gold-as-workhorse": {
+      "$description": "Gold (--accent) is the primary identity color. Section tags, mono labels, vessel highlights, accent borders, decorative line work all use gold."
+    },
+    "cream-for-revelation": {
+      "$description": "Cream-white (--contrast) is reserved for the moment of revelation — peak contrast states. Should appear at one or two points only."
+    },
+    "no-saturation": {
+      "$description": "No saturated colors anywhere. No pure red, pure blue, pure green. The palette lives in a narrow tonal range. Sophistication comes from restraint."
+    },
+    "layered-backgrounds": {
+      "$description": "Backgrounds are always layered: gradient base + subtle corner accent glows. Never use flat pure black."
+    }
+  }
+}

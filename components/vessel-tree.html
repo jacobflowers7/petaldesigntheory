@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!--
+  PETAL Insights — Vessel Tree Component
+
+  Reusable SVG pulmonary artery tree at three contrast states:
+    - Pre-contrast: muted grey, baseline visibility
+    - Mid-injection: gold tint, contrast spreading through the system
+    - Peak enhancement: cream-white, fully filled vessels
+    - Peak with filling defect: peak state + dark gap + red pulse ring
+
+  This is the anatomical motif of the PETAL CTPA / pulmonary embolism
+  chapters. It can be reused in any composition that needs to show
+  the pulmonary vasculature at any stage of contrast enhancement.
+
+  Geometry notes:
+    - Main pulmonary trunk at center (8px stroke)
+    - Right pulmonary artery curves up and right
+    - Left pulmonary artery curves up and left
+    - Three lobar branches per side (5px stroke)
+    - Multiple segmental sub-branches (3px stroke)
+    - All strokes use stroke-linecap="round" for soft edges
+
+  The geometry is anatomically suggestive, not literal. It's
+  editorial illustration, not a textbook diagram.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PETAL Vessel Tree Component</title>
+<link rel="stylesheet" href="../tokens/colors.css">
+<style>
+  body {
+    margin: 0;
+    padding: 60px;
+    background:
+      radial-gradient(ellipse at 20% 15%, var(--glow-accent) 0%, transparent 60%),
+      linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .row {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .vessel-frame {
+    width: 380px;
+    height: 380px;
+    border: 1px solid var(--border);
+    background: #05080b;
+    position: relative;
+    border-radius: 2px;
+  }
+
+  .frame-label {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .frame-state {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .alert-state .frame-state,
+  .alert-state .frame-label {
+    color: var(--alert);
+  }
+
+  .caption {
+    margin-top: 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--text-dim);
+    text-align: center;
+  }
+
+  /* Vessel state classes — apply to the SVG group */
+  .vessel-pre .vessel-path { stroke: var(--vessel); }
+  .vessel-mid .vessel-path { stroke: rgba(200, 169, 110, 0.5); }
+  .vessel-peak .vessel-path { stroke: var(--contrast); }
+  .vessel-defect .vessel-path { stroke: var(--contrast); }
+
+  /* Pulse animation for filling defect */
+  @keyframes pulse-clot {
+    0% { r: 6; opacity: 0.6; }
+    100% { r: 22; opacity: 0; }
+  }
+
+  .clot-pulse {
+    animation: pulse-clot 1.8s ease-out infinite;
+    transform-origin: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="row">
+
+  <!-- Pre-contrast state -->
+  <div>
+    <div class="vessel-frame">
+      <div class="frame-label">CTPA · Axial</div>
+      <div class="frame-state">Pre-contrast</div>
+      <svg viewBox="0 0 380 380" width="380" height="380" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="190" cy="200" rx="145" ry="135" fill="none" stroke="rgba(242,244,247,0.06)" stroke-width="1"/>
+        <circle cx="190" cy="305" r="14" fill="rgba(242,244,247,0.08)"/>
+        <path d="M 150 205 Q 140 175 165 160 Q 190 150 215 160 Q 240 175 235 205 Q 230 240 190 255 Q 155 240 150 205 Z" fill="rgba(242,244,247,0.04)" stroke="rgba(242,244,247,0.12)" stroke-width="1"/>
+        <g class="vessel-pre">
+          <path class="vessel-path" d="M 190 195 L 190 170" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 190 170 Q 210 160 240 165 L 275 170" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 260 165 Q 285 155 295 140 L 305 118" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 275 170 Q 295 175 310 185 L 325 200" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 275 170 Q 295 195 305 220 L 315 260" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 305 118 L 315 100 M 305 118 L 325 115" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 325 200 L 345 205 M 325 200 L 335 218" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 315 260 L 325 275 M 315 260 L 300 285" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 190 170 Q 170 160 140 165 L 105 170" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 120 165 Q 95 155 85 140 L 75 118" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 105 170 Q 85 175 70 185 L 55 200" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 105 170 Q 85 195 75 220 L 65 260" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 75 118 L 65 100 M 75 118 L 55 115" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 55 200 L 35 205 M 55 200 L 45 218" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 65 260 L 55 275 M 65 260 L 80 285" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+    <div class="caption">Vessels, empty.</div>
+  </div>
+
+  <!-- Mid-injection state -->
+  <div>
+    <div class="vessel-frame">
+      <div class="frame-label">CTPA · Axial</div>
+      <div class="frame-state">Injection</div>
+      <svg viewBox="0 0 380 380" width="380" height="380" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="190" cy="200" rx="145" ry="135" fill="none" stroke="rgba(242,244,247,0.06)" stroke-width="1"/>
+        <circle cx="190" cy="305" r="14" fill="rgba(242,244,247,0.08)"/>
+        <path d="M 150 205 Q 140 175 165 160 Q 190 150 215 160 Q 240 175 235 205 Q 230 240 190 255 Q 155 240 150 205 Z" fill="rgba(242,244,247,0.04)" stroke="rgba(242,244,247,0.12)" stroke-width="1"/>
+        <g class="vessel-mid">
+          <path class="vessel-path" d="M 190 195 L 190 170" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 190 170 Q 210 160 240 165 L 275 170" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 260 165 Q 285 155 295 140 L 305 118" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 275 170 Q 295 175 310 185 L 325 200" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 275 170 Q 295 195 305 220 L 315 260" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 305 118 L 315 100 M 305 118 L 325 115" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 325 200 L 345 205 M 325 200 L 335 218" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 315 260 L 325 275 M 315 260 L 300 285" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 190 170 Q 170 160 140 165 L 105 170" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 120 165 Q 95 155 85 140 L 75 118" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 105 170 Q 85 175 70 185 L 55 200" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 105 170 Q 85 195 75 220 L 65 260" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 75 118 L 65 100 M 75 118 L 55 115" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 55 200 L 35 205 M 55 200 L 45 218" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 65 260 L 55 275 M 65 260 L 80 285" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+    <div class="caption">Iodine, rising.</div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <!-- Peak enhancement state -->
+  <div>
+    <div class="vessel-frame">
+      <div class="frame-label">CTPA · Axial</div>
+      <div class="frame-state">Peak</div>
+      <svg viewBox="0 0 380 380" width="380" height="380" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="190" cy="200" rx="145" ry="135" fill="none" stroke="rgba(242,244,247,0.06)" stroke-width="1"/>
+        <circle cx="190" cy="305" r="14" fill="rgba(242,244,247,0.08)"/>
+        <path d="M 150 205 Q 140 175 165 160 Q 190 150 215 160 Q 240 175 235 205 Q 230 240 190 255 Q 155 240 150 205 Z" fill="rgba(242,244,247,0.04)" stroke="rgba(242,244,247,0.12)" stroke-width="1"/>
+        <g class="vessel-peak">
+          <path class="vessel-path" d="M 190 195 L 190 170" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 190 170 Q 210 160 240 165 L 275 170" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 260 165 Q 285 155 295 140 L 305 118" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 275 170 Q 295 175 310 185 L 325 200" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 275 170 Q 295 195 305 220 L 315 260" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 305 118 L 315 100 M 305 118 L 325 115" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 325 200 L 345 205 M 325 200 L 335 218" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 315 260 L 325 275 M 315 260 L 300 285" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 190 170 Q 170 160 140 165 L 105 170" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 120 165 Q 95 155 85 140 L 75 118" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 105 170 Q 85 175 70 185 L 55 200" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 105 170 Q 85 195 75 220 L 65 260" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 75 118 L 65 100 M 75 118 L 55 115" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 55 200 L 35 205 M 55 200 L 45 218" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 65 260 L 55 275 M 65 260 L 80 285" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <line x1="40" y1="200" x2="340" y2="200" stroke="var(--accent)" stroke-width="0.5" stroke-dasharray="2,3" opacity="0.5"/>
+          <line x1="190" y1="60" x2="190" y2="340" stroke="var(--accent)" stroke-width="0.5" stroke-dasharray="2,3" opacity="0.5"/>
+        </g>
+      </svg>
+    </div>
+    <div class="caption">The scan fires.</div>
+  </div>
+
+  <!-- Peak with filling defect (alert state) -->
+  <div class="alert-state">
+    <div class="vessel-frame" style="border-color: var(--border-alert);">
+      <div class="frame-label">CTPA · Positive</div>
+      <div class="frame-state">Diagnosis</div>
+      <svg viewBox="0 0 380 380" width="380" height="380" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="190" cy="200" rx="145" ry="135" fill="none" stroke="rgba(242,244,247,0.06)" stroke-width="1"/>
+        <circle cx="190" cy="305" r="14" fill="rgba(242,244,247,0.08)"/>
+        <path d="M 150 205 Q 140 175 165 160 Q 190 150 215 160 Q 240 175 235 205 Q 230 240 190 255 Q 155 240 150 205 Z" fill="rgba(242,244,247,0.04)" stroke="rgba(242,244,247,0.12)" stroke-width="1"/>
+        <g class="vessel-defect">
+          <path class="vessel-path" d="M 190 195 L 190 170" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 190 170 Q 210 160 240 165 L 275 170" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 260 165 Q 285 155 295 140 L 305 118" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 275 170 Q 295 175 310 185 L 325 200" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 275 170 Q 295 195 305 220 L 315 260" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 305 118 L 315 100 M 305 118 L 325 115" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 325 200 L 345 205 M 325 200 L 335 218" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 315 260 L 325 275 M 315 260 L 300 285" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 190 170 Q 170 160 140 165 L 105 170" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 120 165 Q 95 155 85 140 L 75 118" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 105 170 Q 85 175 70 185 L 55 200" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 105 170 Q 85 195 75 220 L 65 260" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 75 118 L 65 100 M 75 118 L 55 115" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 55 200 L 35 205 M 55 200 L 45 218" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="vessel-path" d="M 65 260 L 55 275 M 65 260 L 80 285" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- Filling defect -->
+        <g>
+          <ellipse cx="290" cy="170" rx="14" ry="5" fill="#05080b" stroke="#05080b" stroke-width="1"/>
+          <circle class="clot-pulse" cx="290" cy="170" r="6" fill="none" stroke="var(--clot)" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="290" cy="170" r="3" fill="var(--clot)" opacity="0.9"/>
+        </g>
+      </svg>
+    </div>
+    <div class="caption" style="color: var(--clot);">The clot, caught.</div>
+  </div>
+
+</div>
+
+</body>
+</html>

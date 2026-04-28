@@ -1,0 +1,116 @@
+/**
+ * PETAL Insights — Color Tokens
+ *
+ * Importable CSS custom properties for the PETAL visual identity.
+ * Usage: import this file in any project, then reference variables
+ * in your stylesheets:
+ *
+ *   .my-element {
+ *     background: var(--bg);
+ *     color: var(--text);
+ *     border-color: var(--border);
+ *   }
+ *
+ * For AI design tools: these tokens define the entire color system.
+ * Stay strictly within these values. The palette achieves its
+ * sophistication through restraint, not range.
+ */
+
+:root {
+  /* ──────────────────────────────────────────────────────────────
+     Background tokens
+     ────────────────────────────────────────────────────────────── */
+
+  /* Primary background. Near-black with a faint blue-black undertone.
+     Use as the base layer of any composition. */
+  --bg: #070c11;
+
+  /* Card surfaces, panels, secondary containers. Slightly lighter
+     than --bg so that elevated elements separate visually without
+     needing borders or shadows. */
+  --surface: #0d1419;
+
+  /* All dividers, panel borders, hairlines. Use this consistently
+     instead of inventing new border colors. */
+  --border: rgba(255, 255, 255, 0.08);
+
+  /* ──────────────────────────────────────────────────────────────
+     Accent tokens
+     ────────────────────────────────────────────────────────────── */
+
+  /* Primary warm gold. Section labels, mono tags, vessel mid-state,
+     key UI elements, accent borders. The "this is PETAL" color. */
+  --accent: #c8a96e;
+
+  /* Cream-gold for peak/high-emphasis states. Used for the brightest
+     elements in a composition (fully contrast-filled vessels at peak
+     enhancement, etc.). Should appear at one or two points only. */
+  --contrast: #f4e8c8;
+
+  /* Muted inactive grey for ghost/baseline elements (pre-contrast
+     vessels, inactive states). Designed to fade into the background
+     while remaining structurally visible. */
+  --vessel: rgba(242, 244, 247, 0.18);
+
+  /* Muted clinical red. Used ONLY for alert states, filling defects,
+     risk indicators. Never bright, never saturated.
+     One red per composition is the rule. */
+  --clot: #e05c5c;
+  --alert: #e05c5c; /* alias of --clot */
+
+  /* ──────────────────────────────────────────────────────────────
+     Text tokens
+     ────────────────────────────────────────────────────────────── */
+
+  /* Primary text. Off-white, never pure white. */
+  --text: #f2f4f7;
+
+  /* Body copy, descriptions, secondary text. */
+  --text-dim: rgba(242, 244, 247, 0.72);
+
+  /* Tertiary text, timestamps, minor labels, contextual tags. */
+  --text-muted: rgba(242, 244, 247, 0.42);
+
+  /* ──────────────────────────────────────────────────────────────
+     Atmosphere tokens (background gradient stack)
+     ────────────────────────────────────────────────────────────── */
+
+  /* Gold corner glow at low opacity. Apply as a radial gradient in
+     one corner of the canvas (typically top-left). */
+  --glow-accent: rgba(200, 169, 110, 0.08);
+
+  /* Red corner glow for alert-context compositions. Apply opposite
+     the gold glow (typically bottom-right). Use 0.06 for
+     alert-leading compositions, 0.04 otherwise. */
+  --glow-alert: rgba(224, 92, 92, 0.06);
+
+  /* ──────────────────────────────────────────────────────────────
+     Component-specific tokens
+     ────────────────────────────────────────────────────────────── */
+
+  /* Background for accent callout cards (key insight callouts). */
+  --callout-bg: rgba(200, 169, 110, 0.06);
+
+  /* Background for alert callout cards (final stage in a sequence,
+     diagnostic moment, etc.). */
+  --callout-alert-bg: rgba(224, 92, 92, 0.04);
+
+  /* Border for alert containers. */
+  --border-alert: rgba(224, 92, 92, 0.4);
+}
+
+/**
+ * Background layer pattern
+ *
+ * Backgrounds always use a layered approach: gradient base + corner
+ * accent glows. Use this pattern as the body or canvas background:
+ *
+ *   body {
+ *     background:
+ *       radial-gradient(ellipse at 20% 15%, var(--glow-accent) 0%, transparent 60%),
+ *       radial-gradient(ellipse at 80% 85%, var(--glow-alert) 0%, transparent 60%),
+ *       linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
+ *   }
+ *
+ * Pure flat black backgrounds read as cheap. Always layer.
+ */
