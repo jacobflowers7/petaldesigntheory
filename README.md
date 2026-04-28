@@ -69,7 +69,7 @@ When generating new assets, refer to these examples as the canonical visual lang
 Anthropic's Claude Design tool can ingest a GitHub repository as a project-level design system. To load this system:
 
 1. In Claude Design, create a new project
-2. Add this repository URL as the design system source: `https://github.com/[your-username]/petal-design-system`
+2. Add this repository URL as the design system source: `https://github.com/jacobflowers7/petaldesigntheory`
 3. Reference the design system in any prompt: *"Apply the PETAL design system. Create a [whatever you need]."*
 
 Claude Design will read the CSS tokens, component templates, and example images, and apply them automatically to whatever you generate.
